@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>DOM y Gestion de Eventos</title>
+  </head>
+  <body>
+    <!--Contenedor vacío que usamos para cambio fondo dinámicamente con Js-->
+    <div id="imagen"></div>
+    <div id="message">
+      <h1>Pulsa Ctrl + B para cambiar el fondo.</h1>
+    </div>
+    <script>
+      //Función que escucha el evento
+      document.addEventListener('keydown', function (event) {
+        //Comprobamos si están pulsadas las teclas correspondientes
+        if (event.ctrlKey && event.code === 'KeyB') {
+          //Ocultamos el mensaje
+          document.getElementById('message').style.display = 'none';
+          //Mostramos fondo
+          const backgroundImage = document.getElementById('imagen');
+          backgroundImage.style.display = 'block'; //cambiamos estilo para hacerlo visible.
+          backgroundImage.style.background = "url('./img/imagen1.jpg')";
+        }
+      });
+    </script>
+  </body>
+</html>

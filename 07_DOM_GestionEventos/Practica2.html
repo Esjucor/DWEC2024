@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Validación</title>
+</head>
+<body>
+    <h1>Formulario de Inicio de Sesión</h1>
+    <form id="loginForm">
+        <label>
+            Correo Electrónico:
+            <input type="text" id="email" placeholder="xxxx@yyyy.zzzz">
+            <small id="emailError" style="color: red; display: none;">Formato: xxxx@yyyy.zzzz</small>
+        </label>
+        <br><br>
+        <label>
+            Contraseña:
+            <input type="password" id="password" placeholder="8-10 caracteres">
+            <small id="passwordError" style="color: red; display: none;">Debe tener 8-10 caracteres</small>
+        </label>
+        <br><br>
+        <button type="submit" id="submitButton" disabled>Enviar</button>
+    </form>
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const submitButton = document.getElementById('submitButton');
+
+        // Función para validar email y contraseña
+        function validate() {
+            const emailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailInput.value);
+            const passwordValid = passwordInput.value.length >= 8 && passwordInput.value.length <= 10;
+
+            emailError.style.display = emailValid ? 'none' : 'inline';
+            passwordError.style.display = passwordValid ? 'none' : 'inline';
+
+            submitButton.disabled = !(emailValid && passwordValid);
+        }
+
+        // Validar en blur y eliminar mensajes en input
+        emailInput.addEventListener('blur', validate);
+        passwordInput.addEventListener('blur', validate);
+        emailInput.addEventListener('input', () => emailError.style.display = 'none');
+        passwordInput.addEventListener('input', () => passwordError.style.display = 'none');
+
+        // Evitar envío si no es válido
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Formulario enviado con éxito');
+        });
+    </script>
+</body>
+</html>
